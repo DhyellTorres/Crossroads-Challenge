@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://iyhfju7khkwr"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_1k6hq"]
+[ext_resource type="Texture2D" uid="uid://wsly5wfusqse" path="res://Material freeway/wallpaperfreeway.png" id="1_c2mf7"]
+[ext_resource type="PackedScene" uid="uid://cjb7b5ymeoas3" path="res://chegada.tscn" id="2_qum63"]
+[ext_resource type="PackedScene" uid="uid://cwm07rfen537w" path="res://player.tscn" id="3_qmdxx"]
+[ext_resource type="PackedScene" uid="uid://cjqxcms6h0uvv" path="res://player_2.tscn" id="4_b4p0d"]
+[ext_resource type="FontFile" uid="uid://dmwahuhya46yn" path="res://Material freeway/PressStart2P-Regular.ttf" id="6_xjpcj"]
+[ext_resource type="AudioStream" uid="uid://b8ljn62eir3wr" path="res://Material freeway/sons/ponto.wav" id="7_63mtb"]
+[ext_resource type="AudioStream" uid="uid://qsr38t17v4ed" path="res://Material freeway/sons/ganhou.wav" id="8_21rph"]
+[ext_resource type="AudioStream" uid="uid://c6t0cvmqe1r1k" path="res://Material freeway/sons/tema.wav" id="9_dtx0f"]
+
+[sub_resource type="FontVariation" id="FontVariation_4wtfc"]
+base_font = ExtResource("6_xjpcj")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_1k6hq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c2mf7")
+centered = false
+
+[node name="chegada" parent="." instance=ExtResource("2_qum63")]
+position = Vector2(638.66, 64)
+
+[node name="Player" parent="." instance=ExtResource("3_qmdxx")]
+position = Vector2(320, 696)
+
+[node name="Player2" parent="." instance=ExtResource("4_b4p0d")]
+position = Vector2(944, 696)
+
+[node name="horaCarroRapido" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
+
+[node name="horaCarroDevagar" type="Timer" parent="."]
+autostart = true
+
+[node name="placar1" type="Label" parent="."]
+offset_left = 300.0
+offset_top = 10.0
+offset_right = 320.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.227451, 0.545098, 0.588235, 1)
+theme_override_fonts/font = SubResource("FontVariation_4wtfc")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+
+[node name="placar2" type="Label" parent="."]
+offset_left = 920.0
+offset_top = 10.0
+offset_right = 944.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.227451, 0.545098, 0.588235, 1)
+theme_override_fonts/font = SubResource("FontVariation_4wtfc")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+
+[node name="resultado" type="Label" parent="."]
+offset_top = 10.0
+offset_right = 1280.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.227451, 0.545098, 0.588235, 1)
+theme_override_fonts/font = SubResource("FontVariation_4wtfc")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="ponto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_63mtb")
+
+[node name="ganhou" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_21rph")
+
+[node name="tema" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_dtx0f")
+volume_db = -24.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 496.0
+offset_top = 320.0
+offset_right = 796.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(0.227451, 0.545098, 0.588235, 1)
+theme_override_fonts/font = SubResource("FontVariation_4wtfc")
+theme_override_font_sizes/font_size = 30
+text = "Reiniciar"
+
+[connection signal="game_over" from="." to="Player" method="_on_main_game_over"]
+[connection signal="game_over" from="." to="Player2" method="_on_main_game_over"]
+[connection signal="pontua" from="Player" to="." method="_on_player_pontua"]
+[connection signal="pontua2" from="Player2" to="." method="_on_player_2_pontua_2"]
+[connection signal="timeout" from="horaCarroRapido" to="." method="_on_hora_carro_rapido_timeout"]
+[connection signal="timeout" from="horaCarroDevagar" to="." method="_on_hora_carro_devagar_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

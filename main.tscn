@@ -30,7 +30,6 @@ position = Vector2(320, 696)
 position = Vector2(944, 696)
 
 [node name="horaCarroRapido" type="Timer" parent="."]
-wait_time = 0.6
 autostart = true
 
 [node name="horaCarroDevagar" type="Timer" parent="."]

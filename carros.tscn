@@ -151,7 +151,7 @@ script = ExtResource("1_vj57y")
 rotation = 1.5708
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_d0cjy")
-animation = &"new_animation_12"
+animation = &"new_animation_5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.25, -1)

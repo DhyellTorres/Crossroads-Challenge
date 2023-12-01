@@ -35,6 +35,7 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.name == "chegada":
 		emit_signal("pontua")
+		speed += 0.01 * speed
 	else:
 		$AnimatedSprite2D.play()
 		$colisao.play()
